@@ -13,6 +13,17 @@ let userGuess = document.getElementById("userGuess");
 let attempts = document.getElementById("attempt");
 attempts.innerHTML = "Attempt number:" + attemptCounter;
 
+//reset the game
+function reset() {
+  //generates a random number between 1-20
+  let num = Math.floor(Math.random() * 20) + 1;
+  console.log(num);
+  //Initialize an attempt counter
+  let attemptCounter = 1;
+  //establish an attempts limit
+  let maxAttempts = 3;
+}
+
 //Number validation for the input field
 function numberValidation(n) {
   if (isNaN(n)) {
@@ -20,6 +31,10 @@ function numberValidation(n) {
   } else {
     return true;
   }
+}
+//clear input field after each attempt
+function clearField() {
+  document.getElementById("userGuess").value = "";
 }
 // Add click event to the submit button
 submitBtn.addEventListener("click", function () {
@@ -38,12 +53,16 @@ function checkResult(userGuess) {
     let results = document.getElementById("results");
     //if the user guessed number is higher than the randomly generated number
     if (userGuess > num) {
+      //clear user input field
+      clearField();
       // show the results p by removing the hidden class
       results.removeAttribute("class");
       // outputs to the user that the guessed number is too high
       results.innerHTML =
         "You answered " + userGuess + ". The correct answer is lower!";
     } else if (userGuess < num) {
+      //clear user input field
+      clearField();
       // show the results p by removing the hidden class
       results.removeAttribute("class");
       // outputs to the user that the guessed number is too low
@@ -60,7 +79,10 @@ function checkResult(userGuess) {
     attemptCounter++;
     attempts.innerHTML = "Attempt number:" + attemptCounter;
   } else {
-    results.innerHTML = "You lose!";
+    attempts.innerHTML = "<b>Attempts allowance exceeded.</b>";
+    results.innerHTML =
+      "<h2>You lose the game! The random number was " + num + ".</h2>";
+    reset();
   }
 }
 
