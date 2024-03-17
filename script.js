@@ -2,10 +2,23 @@
 let submitBtn = document.getElementById("submitBtn");
 //get the user input field
 let userGuess = document.getElementById("userGuess");
+
+//Number validation for the input field
+function numberValidation(n) {
+  if (isNaN(n)) {
+    return false;
+  } else {
+    return true;
+  }
+}
 // Add click event to the submit button
 submitBtn.addEventListener("click", function () {
-  //call the checkResult function passing the user chosen number as parameter
-  checkResult(userGuess.value);
+  //if the input validation is true (the user has inserted a number)
+  numberValidation(userGuess.value)
+    ? //call the checkResult function passing the user chosen number as parameter
+      checkResult(userGuess.value)
+    : //otherwise alert the user to insert a numeric value before proceeding
+      alert("Please enter Numeric value!");
 });
 
 //Game logic function; takes the user guessed number as parameter
@@ -36,7 +49,5 @@ function checkResult(userGuess) {
       "You answered " + userGuess + ". This is the correct answer!";
   }
 }
-
-//input validation
 
 //presentation
