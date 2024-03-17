@@ -12,17 +12,8 @@ let userGuess = document.getElementById("userGuess");
 //get the attempt number p
 let attempts = document.getElementById("attempt");
 attempts.innerHTML = "Attempt number:" + attemptCounter;
-
-//reset the game
-function reset() {
-  //generates a random number between 1-20
-  let num = Math.floor(Math.random() * 20) + 1;
-  console.log(num);
-  //Initialize an attempt counter
-  let attemptCounter = 1;
-  //establish an attempts limit
-  let maxAttempts = 3;
-}
+//create a reset button
+let resetBtn = "<button onClick=window.location.reload()>Play again</button>";
 
 //Number validation for the input field
 function numberValidation(n) {
@@ -82,7 +73,7 @@ function checkResult(userGuess) {
     attempts.innerHTML = "<b>Attempts allowance exceeded.</b>";
     results.innerHTML =
       "<h2>You lose the game! The random number was " + num + ".</h2>";
-    reset();
+    results.insertAdjacentHTML("afterend", resetBtn);
   }
 }
 
